@@ -18,7 +18,11 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    
+    public static MainManager Instance;
+
+    public Text playerName;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +64,22 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
+    }
+
+    
+
+    private void Awake()
+    {
+        // start of new code
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        // end of new code
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void AddPoint(int point)
